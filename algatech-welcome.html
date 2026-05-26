@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="cs" class="lang-cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vítejte v Algatech · onboardingový průvodce</title>
+  <meta name="description" content="Onboardingový web pro nové kolegy a kolegyně Centra Algatech v Třeboni. Spravuje HR — Jana Budínová." />
+  <style>
+    :root {
+      /* Algae-inspired palette inspired by alga.cz */
+      --bg: #f7f9f5;
+      --surface: #ffffff;
+      --surface-warm: #faf7ee;
+      --ink: #142b1f;
+      --ink-soft: #34503e;
+      --muted: #6c8076;
+      --line: #d8e4dc;
+      --line-soft: #ecf2ee;
+      --green: #2d6a4f;
+      --green-dark: #1f5236;
+      --green-light: #74c69d;
+      --green-soft: #e3f1e7;
+      --algae: #4a9168;
+      --water: #5a8a9c;
+      --gold: #c8a44a;
+      --gold-soft: #faf3df;
+      --warn: #b86a00;
+      --warn-soft: #fff5e5;
+      --shadow: 0 14px 30px rgba(20, 43, 31, 0.08);
+      --shadow-sm: 0 4px 12px rgba(20, 43, 31, 0.06);
+      --radius: 18px;
+      --max: 1200px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--green-dark); }
+    a:hover { color: var(--algae); }
+    img, svg { max-width: 100%; display: block; }
+
+    /* Topbar */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 0.98rem;
+    }
+    .brand-logo {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+      display: grid; place-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .brand-logo svg { width: 20px; height: 20px; color: white; }
+    .brand small {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+    .lang-switch {
+      display: inline-flex;
+      background: var(--green-soft);
+      padding: 4px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+    }
+    .lang-switch button {
+      border: 0; background: transparent;
+      padding: 8px 14px; border-radius: 999px;
+      font-weight: 700; cursor: pointer; color: var(--muted);
+      font-family: inherit; font-size: 0.9rem;
+    }
+    .lang-switch button.active {
+      background: white; color: var(--ink);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative; overflow: hidden;
+      background:
+        radial-gradient(circle at 90% 10%, rgba(116,198,157,0.18), transparent 60%),
+        radial-gradient(circle at 10% 90%, rgba(90,138,156,0.12), transparent 60%),
+        linear-gradient(170deg, #f1f8f4 0%, #f7f9f5 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-wrap {
+      max-width: var(--max); margin: 0 auto;
+      padding: 64px 20px 56px;
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px;
+      background: white; color: var(--green-dark);
+      border-radius: 999px;
+      font-weight: 700; font-size: 0.82rem;
+      margin-bottom: 18px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
+    .eyebrow .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green-light);
+      box-shadow: 0 0 0 4px rgba(116,198,157,0.25);
+    }
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
+      line-height: 1.1; letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    .lead { color: var(--ink-soft); font-size: 1.08rem; max-width: 580px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 13px 22px; border-radius: 999px;
+      text-decoration: none; font-weight: 700;
+      transition: all 0.2s ease; border: 0; cursor: pointer; font-size: 0.96rem;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--green); color: white;
+      box-shadow: 0 6px 18px rgba(45, 106, 79, 0.28);
+    }
+    .btn-primary:hover {
+      background: var(--green-dark); color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(45, 106, 79, 0.35);
+    }
+    .btn-secondary {
+      background: white; color: var(--ink); border: 1px solid var(--line);
+    }
+    .btn-secondary:hover { border-color: var(--green); color: var(--green-dark); transform: translateY(-1px); }
+
+    .hero-illustration {
+      position: relative;
+      width: 100%; aspect-ratio: 4 / 3;
+      display: grid; place-items: center;
+    }
+    .hero-illustration svg { width: 100%; height: 100%; }
+
+    /* Main */
+    main { max-width: var(--max); margin: 0 auto; padding: 28px 20px 60px; }
+
+    /* Interactive TOC */
+    .toc {
+      margin-top: -32px;
+      position: relative; z-index: 5;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px 28px 22px;
+      box-shadow: var(--shadow);
+    }
+    .toc h2 { margin: 0 0 4px; font-size: 1.25rem; color: var(--ink); }
+    .toc-intro { color: var(--ink-soft); margin: 0 0 18px; font-size: 0.96rem; }
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .toc-card {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fff, #fbfdfb);
+      text-decoration: none; color: var(--ink);
+      transition: all 0.18s ease;
+    }
+    .toc-card:hover {
+      border-color: var(--green);
+      background: var(--green-soft);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+      color: var(--green-dark);
+    }
+    .toc-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: grid; place-items: center;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      flex-shrink: 0;
+      font-size: 1.15rem;
+    }
+    .toc-card:hover .toc-icon {
+      background: white;
+    }
+    .toc-card span { font-weight: 600; font-size: 0.95rem; line-height: 1.3; }
+
+    /* Sections */
+    section {
+      margin-top: 28px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 90px;
+    }
+    .section-head {
+      display: flex; align-items: flex-start; gap: 18px;
+      margin-bottom: 12px;
+    }
+    .section-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: grid; place-items: center;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      flex-shrink: 0;
+      font-size: 1.4rem;
+    }
+    h2 {
+      margin: 0;
+      font-size: 1.65rem; letter-spacing: -0.02em; color: var(--ink);
+      line-height: 1.2;
+    }
+    .section-intro { margin: 0 0 22px; color: var(--ink-soft); max-width: 820px; }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .card {
+      border: 1px solid var(--line); border-radius: 16px;
+      padding: 22px;
+      background: linear-gradient(180deg, #fff, #fbfdfb);
+    }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.04rem; color: var(--ink);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-icon {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      display: grid; place-items: center;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .card p, .card li { color: var(--ink-soft); }
+    ul { padding-left: 20px; margin: 10px 0 0; }
+
+    .contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .quick-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+
+    .highlight {
+      background: var(--green-soft); border-left: 4px solid var(--green);
+      padding: 16px 18px; border-radius: 14px;
+      margin-top: 18px; color: var(--ink);
+    }
+    .friendly-note {
+      background: var(--gold-soft);
+      border-left: 4px solid var(--gold);
+      padding: 16px 18px; border-radius: 14px;
+      margin-top: 18px; color: var(--ink);
+    }
+    .friendly-note strong { color: var(--green-dark); }
+
+    /* Phase blocks (replaces day timeline) */
+    .phases { display: grid; gap: 14px; }
+    .phase {
+      display: grid; grid-template-columns: 56px 1fr; gap: 18px; align-items: start;
+      padding: 22px;
+      border: 1px solid var(--line); border-radius: 16px;
+      background: linear-gradient(180deg, #fff, #fbfdfb);
+    }
+    .phase-mark {
+      width: 56px; height: 56px; border-radius: 16px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      display: grid; place-items: center;
+      font-size: 1.5rem;
+    }
+    .phase h3 { margin: 0 0 6px; font-size: 1.08rem; color: var(--ink); }
+    .phase p { margin: 0; color: var(--ink-soft); }
+    .phase ul { margin-top: 8px; }
+    .phase li { color: var(--ink-soft); margin-bottom: 4px; }
+
+    /* Source list */
+    .source-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .source-list a {
+      display: inline-block; padding: 5px 11px;
+      background: var(--line-soft); border-radius: 999px;
+      font-size: 0.82rem; text-decoration: none;
+      color: var(--ink-soft); border: 1px solid var(--line);
+    }
+    .source-list a:hover {
+      background: var(--green-soft); color: var(--green-dark); border-color: var(--green);
+    }
+
+    /* Form */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label { display: block; font-weight: 600; font-size: 0.9rem; color: var(--ink); margin-bottom: 6px; }
+    input[type="text"], input[type="email"], select, textarea {
+      width: 100%; padding: 12px 14px;
+      background: white; border: 1px solid var(--line);
+      border-radius: 12px; font-family: inherit; font-size: 0.97rem; color: var(--ink);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none; border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(45,106,79,0.15);
+    }
+    textarea { min-height: 140px; resize: vertical; }
+    .form-row { margin-top: 14px; }
+    .form-help { color: var(--muted); font-size: 0.85rem; margin-top: 6px; }
+    .form-status {
+      margin-top: 14px; padding: 12px 14px;
+      border-radius: 12px; background: var(--green-soft); color: var(--green-dark);
+      display: none;
+    }
+    .form-status.is-visible { display: block; }
+
+    /* Footer */
+    .footer {
+      max-width: var(--max); margin: 30px auto 50px;
+      padding: 24px 20px 0;
+      color: var(--muted); font-size: 0.93rem;
+      border-top: 1px solid var(--line);
+    }
+    .footer p { margin: 6px 0; }
+    .footer strong { color: var(--ink-soft); }
+
+    /* Language visibility */
+    [data-lang] { display: none; }
+    html.lang-en [data-lang="en"] { display: inline; }
+    html.lang-cs [data-lang="cs"] { display: inline; }
+    html.lang-en [data-lang-block="en"] { display: block; }
+    html.lang-cs [data-lang-block="cs"] { display: block; }
+    html.lang-en [data-lang-flex="en"] { display: flex; }
+    html.lang-cs [data-lang-flex="cs"] { display: flex; }
+    html.lang-en [data-lang-grid="en"] { display: grid; }
+    html.lang-cs [data-lang-grid="cs"] { display: grid; }
+
+    /* Hide entire EN-only sections in Czech */
+    html.lang-cs [data-only-en] { display: none !important; }
+    html.lang-en [data-only-cs] { display: none !important; }
+
+    /* Wave divider */
+    .wave-divider {
+      display: block;
+      width: 100%; height: 22px;
+      margin-top: 26px; opacity: 0.6;
+    }
+
+    @media (max-width: 980px) {
+      .hero-wrap, .cards, .contact-grid, .quick-grid, .form-grid { grid-template-columns: 1fr; }
+      .toc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .nav { flex-wrap: wrap; }
+      .hero-illustration { max-width: 360px; margin: 0 auto; }
+    }
+    @media (max-width: 640px) {
+      section { padding: 26px; }
+      .toc { padding: 22px; }
+      .toc-grid { grid-template-columns: 1fr; }
+    }
+    @media print {
+      .topbar, .lang-switch, .hero-actions, .toc, #ask form { display: none; }
+      section { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ======= NAV ======= -->
+  <div class="topbar">
+    <nav class="nav">
+      <a class="brand" href="#top">
+        <span class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="8" cy="12" r="2.2" />
+            <circle cx="16" cy="9" r="1.8" />
+            <circle cx="14" cy="16" r="1.6" />
+            <path d="M3 19c3-1 6-2 9-2s6 1 9 2" />
+          </svg>
+        </span>
+        <span>
+          ALGATECH
+          <small data-lang="cs">Onboardingový průvodce</small>
+          <small data-lang="en">Onboarding guide</small>
+        </span>
+      </a>
+      <div class="lang-switch" aria-label="Language switcher / Přepínač jazyka">
+        <button type="button" id="btn-cs" class="active" aria-pressed="true">CZ</button>
+        <button type="button" id="btn-en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- ======= HERO ======= -->
+  <header class="hero" id="top">
+    <div class="hero-wrap">
+      <div>
+        <span class="eyebrow"><span class="dot"></span>
+          <span data-lang="cs">Vítejte v Algatech</span>
+          <span data-lang="en">Welcome to Algatech</span>
+        </span>
+        <h1 data-lang-block="cs">Vítejte u nás. Tady je všechno, co potřebujete na začátku.</h1>
+        <h1 data-lang-block="en">Welcome to Algatech. Here's everything you need to get started.</h1>
+        <p class="lead" data-lang-block="cs">
+          Tohle je onboardingový průvodce pro nové kolegy, kolegyně, postdoky, doktorandy i hosty centra Algatech v Třeboni.
+          Ať teprve nastupujete, nebo jste tu první týdny — najdete tu jasné odpovědi na nejčastější otázky.
+          Cokoli vám není jasné, klidně napište <strong>Janě</strong> — jsme tu od toho.
+        </p>
+        <p class="lead" data-lang-block="en">
+          This is the onboarding guide for new colleagues, postdocs, PhD students and guests of Centre Algatech in Třeboň.
+          Whether you're about to start or you're in your first weeks here, this page gives you clear answers to the most common questions.
+          If anything is unclear, just write to <strong>Jana</strong> — that's exactly what we're here for.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#toc">
+            <span data-lang="cs">Otevřít přehled témat</span>
+            <span data-lang="en">Open the topic overview</span>
+          </a>
+          <a class="btn btn-secondary" href="#ask">
+            <span data-lang="cs">Napsat Janě</span>
+            <span data-lang="en">Write to Jana</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-illustration" aria-hidden="true">
+        <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bioreactor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#74c69d" />
+              <stop offset="55%" stop-color="#4a9168" />
+              <stop offset="100%" stop-color="#2d6a4f" />
+            </linearGradient>
+            <linearGradient id="bioreactorLight" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#a6d9b9" />
+              <stop offset="100%" stop-color="#5fa67d" />
+            </linearGradient>
+            <radialGradient id="cell" cx="0.4" cy="0.4" r="0.6">
+              <stop offset="0%" stop-color="#cfeedb" />
+              <stop offset="100%" stop-color="#4a9168" />
+            </radialGradient>
+            <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#eaf3ec" />
+              <stop offset="100%" stop-color="#d8e4dc" />
+            </linearGradient>
+          </defs>
+          <!-- soft ground -->
+          <ellipse cx="240" cy="320" rx="220" ry="20" fill="url(#ground)" opacity="0.7" />
+          <!-- back tube -->
+          <rect x="60" y="80" width="62" height="220" rx="31" fill="url(#bioreactorLight)" opacity="0.85" />
+          <rect x="60" y="80" width="62" height="220" rx="31" fill="none" stroke="#2d6a4f" stroke-width="1.5" opacity="0.4" />
+          <!-- middle big tube -->
+          <rect x="180" y="50" width="84" height="260" rx="42" fill="url(#bioreactor)" />
+          <rect x="180" y="50" width="84" height="260" rx="42" fill="none" stroke="#1f5236" stroke-width="1.6" opacity="0.5" />
+          <!-- bubbles -->
+          <circle cx="210" cy="240" r="5" fill="#cfeedb" opacity="0.85" />
+          <circle cx="232" cy="200" r="3.5" fill="#cfeedb" opacity="0.7" />
+          <circle cx="222" cy="160" r="4.5" fill="#cfeedb" opacity="0.8" />
+          <circle cx="244" cy="120" r="3" fill="#cfeedb" opacity="0.7" />
+          <!-- right tube -->
+          <rect x="320" y="100" width="64" height="200" rx="32" fill="url(#bioreactorLight)" opacity="0.9" />
+          <rect x="320" y="100" width="64" height="200" rx="32" fill="none" stroke="#2d6a4f" stroke-width="1.5" opacity="0.4" />
+          <!-- caps -->
+          <rect x="56" y="68" width="70" height="16" rx="4" fill="#ffffff" stroke="#d8e4dc" />
+          <rect x="176" y="38" width="92" height="16" rx="4" fill="#ffffff" stroke="#d8e4dc" />
+          <rect x="316" y="88" width="72" height="16" rx="4" fill="#ffffff" stroke="#d8e4dc" />
+          <!-- floating algae cells -->
+          <circle cx="125" cy="90" r="14" fill="url(#cell)" />
+          <circle cx="120" cy="86" r="3" fill="#ffffff" opacity="0.7" />
+          <circle cx="395" cy="60" r="11" fill="url(#cell)" />
+          <circle cx="392" cy="58" r="2.4" fill="#ffffff" opacity="0.7" />
+          <circle cx="40" cy="180" r="9" fill="url(#cell)" opacity="0.85" />
+          <circle cx="420" cy="180" r="13" fill="url(#cell)" />
+          <circle cx="417" cy="177" r="2.8" fill="#ffffff" opacity="0.7" />
+          <!-- horizontal lines suggest tubing -->
+          <path d="M0 320 Q 240 305 480 320" fill="none" stroke="#74c69d" stroke-width="2" opacity="0.5" />
+          <path d="M0 335 Q 240 320 480 335" fill="none" stroke="#5a8a9c" stroke-width="1.5" opacity="0.35" />
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======= INTERACTIVE TOC ======= -->
+    <nav class="toc" id="toc" aria-label="Topic navigation">
+      <h2 data-lang-block="cs">Co tu najdete</h2>
+      <h2 data-lang-block="en">What's on this page</h2>
+      <p class="toc-intro" data-lang-block="cs">Klikněte na téma a posuneme vás přímo k němu. Pokud spěcháte, začněte vlevo nahoře a pokračujte po řadě.</p>
+      <p class="toc-intro" data-lang-block="en">Click any topic to jump straight to it. If you're in a hurry, start top-left and work across.</p>
+
+      <div class="toc-grid">
+        <a class="toc-card" href="#about">
+          <span class="toc-icon" aria-hidden="true">🏛️</span>
+          <span data-lang="cs">O centru Algatech</span>
+          <span data-lang="en">About Algatech</span>
+        </a>
+        <a class="toc-card" href="#first-steps">
+          <span class="toc-icon" aria-hidden="true">🌱</span>
+          <span data-lang="cs">První kroky s námi</span>
+          <span data-lang="en">Your first steps with us</span>
+        </a>
+        <a class="toc-card" href="#contacts">
+          <span class="toc-icon" aria-hidden="true">📇</span>
+          <span data-lang="cs">Klíčové kontakty</span>
+          <span data-lang="en">Key contacts</span>
+        </a>
+        <a class="toc-card" href="#work">
+          <span class="toc-icon" aria-hidden="true">💼</span>
+          <span data-lang="cs">Mzda, docházka, dovolená</span>
+          <span data-lang="en">Salary, attendance, leave</span>
+        </a>
+        <a class="toc-card" href="#tax">
+          <span class="toc-icon" aria-hidden="true">🧾</span>
+          <span data-lang="cs">Daně</span>
+          <span data-lang="en">Personal income tax</span>
+        </a>
+        <a class="toc-card" href="#residence" data-only-en>
+          <span class="toc-icon" aria-hidden="true">🛂</span>
+          <span data-lang="en">Residence &amp; visa</span>
+        </a>
+        <a class="toc-card" href="#culture">
+          <span class="toc-icon" aria-hidden="true">🧪</span>
+          <span data-lang="cs">Kultura v laboratořích</span>
+          <span data-lang="en">Lab culture</span>
+        </a>
+        <a class="toc-card" href="#practical">
+          <span class="toc-icon" aria-hidden="true">🛒</span>
+          <span data-lang="cs">Praktické info</span>
+          <span data-lang="en">Practical info</span>
+        </a>
+        <a class="toc-card" href="#life">
+          <span class="toc-icon" aria-hidden="true">🌿</span>
+          <span data-lang="cs">Život v Třeboni</span>
+          <span data-lang="en">Life in Třeboň</span>
+        </a>
+        <a class="toc-card" href="#ask">
+          <span class="toc-icon" aria-hidden="true">💬</span>
+          <span data-lang="cs">Zeptat se HR</span>
+          <span data-lang="en">Ask HR a question</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ======= ABOUT ======= -->
+    <section id="about">
+      <div class="section-head">
+        <span class="section-icon" aria-hidden="true">🏛️</span>
+        <div>
+          <h2 data-lang-block="cs">O centru Algatech</h2>
+          <h2 data-lang-block="en">About Centre Algatech</h2>
+        </div>
+      </div>
+      <p class="section-intro" data-lang-block="cs">
+        <strong>Algatech – Centrum řasových biotechnologií</strong> je největší výzkumné pracoviště zaměřené na mikrořasy v České republice.
+        Sídlíme v krásně zrekonstruovaném Opatovickém mlýně v Třeboni a jsme detašovaným pracovištěm Mikrobiologického ústavu AV ČR.
+        Propojujeme základní biologii řas s aplikovanou biotechnologií — a baví nás to.
+      </p>
+      <p class="section-intro" data-lang-block="en">
+        <strong>Algatech – Centre of Algal Biotechnology</strong> is the largest microalgae research centre in the Czech Republic.
+        We're based in the beautifully restored Opatovický Mill in Třeboň, as a detached facility of the Institute of Microbiology of the Czech Academy of Sciences.
+        We bridge fundamental algal biology and applied biotechnology — and we genuinely enjoy it.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🔬</span>
+            <span data-lang="cs">Pět našich laboratoří</span>
+            <span data-lang="en">Our five laboratories</span>
+          </h3>
+          <ul data-lang-block="cs">
+            <li>Laboratoř fotosyntézy</li>
+            <li>Laboratoř buněčných cyklů řas</li>
+            <li>Laboratoř anoxygenních fototrofů</li>
+            <li>Laboratoř algální biotechnologie</li>
+            <li>Aplikační laboratoř řasových technologií</li>
+          </ul>
+          <ul data-lang-block="en">
+            <li>Laboratory of Photosynthesis</li>
+            <li>Laboratory of Algal Cell Cycles</li>
+            <li>Laboratory of Anoxygenic Phototrophs</li>
+            <li>Laboratory of Algal Biotechnology</li>
+            <li>Application Laboratory of Algal Technologies</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🏠</span>
+            <span data-lang="cs">Kde nás najdete</span>
+            <span data-lang="en">Where to find us</span>
+          </h3>
+          <p data-lang-block="cs">Jsme v historickém Opatovickém mlýně z 18. století — pod hrází Opatovického rybníka, kousek od centra Třeboně. Komplex prošel rozsáhlou rekonstrukcí (2009–2014) a dnes v něm vedle laboratoří funguje i fermentační hala.</p>
+          <p data-lang-block="en">We're located in the historic 18th-century Opatovický Mill, just below the Opatovický pond's dam, a short walk from the centre of Třeboň. The complex was extensively reconstructed in 2009–2014 and today houses laboratories and a fermentation hall.</p>
+          <p style="margin-top:10px;" data-lang-block="cs"><strong>Adresa:</strong><br>Centrum Algatech<br>Mikrobiologický ústav AV ČR, v.&nbsp;v.&nbsp;i.<br>Novohradská 237, 379 01 Třeboň</p>
+          <p style="margin-top:10px;" data-lang-block="en"><strong>Address:</strong><br>Centre Algatech<br>Institute of Microbiology, CAS, v.&nbsp;v.&nbsp;i.<br>Novohradská 237, 379 01 Třeboň, Czech Republic</p>
+        </div>
+      </div>
+      <div class="friendly-note" data-lang-block="cs">
+        <strong>Tip pro první den:</strong> nemusíte se vším přijít hotoví. Pomalu se rozkoukáte — průvodce z týmu vám během prvních dnů ukáže budovu i kávovar.
+      </div>
+      <div class="friendly-note" data-lang-block="en">
+        <strong>Tip for day one:</strong> you don't need to arrive with everything figured out. A buddy from the team will walk you through the building (and the coffee machine) during your first days.
+      </div>
+      <div class="source-list">
+        <a href="https://www.alga.cz" target="_blank" rel="noopener noreferrer">alga.cz</a>
+        <a href="https://www.biomed.cas.cz/mbu/" target="_blank" rel="noopener noreferrer">MBÚ AV ČR</a>
+      </div>
+    </section>
+
+    <!-- ======= FIRST STEPS (no day-by-day) ======= -->
+    <section id="first-steps">
+      <div class="section-head">
+        <span class="section-icon" aria-hidden="true">🌱</span>
+        <div>
+          <h2 data-lang-block="cs">První kroky s námi</h2>
+          <h2 data-lang-block="en">Your first steps with us</h2>
+        </div>
+      </div>
+      <p class="section-intro" data-lang-block="cs">
+        Žádný stres a žádný harmonogram „den po dni“ — onboarding je u nás přátelský proces, který společně procházíme s vaším vedoucím a HR.
+        Tady jsou hlavní okruhy, které vyřešíme po cestě.
+      </p>
+      <p class="section-intro" data-lang-block="en">
+        No stress, no rigid day-by-day schedule — onboarding here is a friendly process that we walk through together with your supervisor and HR.
+        Here are the main themes we cover along the way.
+      </p>
+      <div class="phases">
+        <div class="phase">
+          <div class="phase-mark" aria-hidden="true">✉️</div>
+          <div>
+            <h3 data-lang-block="cs">Než dorazíte</h3>
+            <h3 data-lang-block="en">Before you arrive</h3>
+            <p data-lang-block="cs">Domluvíme si nástupní termín, ubytování a kdo vás první den uvítá. Pošlete nám předem kopii pasu nebo občanky, diplomu a CV — ušetří nám to obíhání první den.</p>
+            <p data-lang-block="en">We'll agree on your start date, accommodation and who will greet you on day one. Please send us copies of your ID/passport, diploma and CV in advance — it saves the running around on the first day.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-mark" aria-hidden="true">👋</div>
+          <div>
+            <h3 data-lang-block="cs">Nástup a první dny</h3>
+            <h3 data-lang-block="en">Your arrival and first days</h3>
+            <p data-lang-block="cs">Podepíšeme společně smlouvu, ukážeme vám budovu a seznámíte se s vedoucím i s laboratorním kolegou-průvodcem. Dostanete kartu, e-mail, přístupy a klíčové kontakty.</p>
+            <p data-lang-block="en">We'll sign the contract together, give you a building tour and introduce you to your supervisor and a lab buddy. You'll get your access card, email, network credentials and key contacts.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-mark" aria-hidden="true">🧷</div>
+          <div>
+            <h3 data-lang-block="cs">Co s vámi vyřídíme společně</h3>
+            <h3 data-lang-block="en">What we'll handle together</h3>
+            <ul data-lang-block="cs">
+              <li>Přihlášení k zdravotní pojišťovně a sociálce zařídíme z naší strany.</li>
+              <li>Nastavíme docházkový systém a vysvětlíme, jak ho používat.</li>
+              <li>Ukážeme stravování, knihovnu, sdílené prostory a sociální zázemí.</li>
+              <li>Předáme klíčové informace k mzdám, dovolené a benefitům.</li>
+            </ul>
+            <ul data-lang-block="en">
+              <li>We register you with the public health and social-security funds.</li>
+              <li>We set up the attendance system and walk you through using it.</li>
+              <li>We show you the canteen, library, shared spaces and facilities.</li>
+              <li>We hand over the key info on payroll, leave and benefits.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase" data-only-en>
+          <div class="phase-mark" aria-hidden="true">🛂</div>
+          <div>
+            <h3 data-lang-block="en">Residence formalities (for foreign colleagues)</h3>
+            <p data-lang-block="en">If you're coming from abroad, HR will guide you through any residence-related steps — registration with the Foreign Police, OAMP appointments at the Ministry of Interior and follow-up paperwork. We coordinate the timing together so you don't have to figure it out alone, and we'll go with you when it helps.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-mark" aria-hidden="true">🧪</div>
+          <div>
+            <h3 data-lang-block="cs">Laboratorní zaškolení</h3>
+            <h3 data-lang-block="en">Lab induction</h3>
+            <p data-lang-block="cs">Než začnete pracovat v laboratoři, projdete povinné školení BOZP a PO. Váš vedoucí a kolega-průvodce vás postupně provedou přístroji, chemikáliemi i konvencemi laboratorního deníku — žádný přístroj se nepoužívá bez místního zaškolení.</p>
+            <p data-lang-block="en">Before you start lab work, you'll do the mandatory occupational-health-and-safety and fire-safety training. Your supervisor and lab buddy will gradually walk you through equipment, chemicals and notebook conventions — no instrument is used without local training.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-mark" aria-hidden="true">🏘️</div>
+          <div>
+            <h3 data-lang-block="cs">Orientace v Třeboni</h3>
+            <h3 data-lang-block="en">Settling into Třeboň</h3>
+            <p data-lang-block="cs">Mezi prvními kroky bývá registrace u praktického lékaře, založení účtu v bance a procházka po městě. V sekci „Praktické info“ a „Život v Třeboni“ najdete tipy a kontakty.</p>
+            <p data-lang-block="en">Among the first steps are registering with a GP, opening a bank account and getting to know the town. The "Practical info" and "Life in Třeboň" sections have tips and contacts.</p>
+          </div>
+        </div>
+      </div>
+      <div class="friendly-note" data-lang-block="cs">
+        <strong>Důležité:</strong> nejsou hloupé otázky. Jakýkoli krok, který vám nedává smysl, klidně sepište do <a href="#ask">formuláře pro HR</a> nebo zavolejte Janě. Raději se zeptáme dvakrát, než aby vás něco zaskočilo.
+      </div>
+      <div class="friendly-note" data-lang-block="en">
+        <strong>Important:</strong> there are no silly questions. If any step doesn't make sense, just write it in the <a href="#ask">HR form below</a> or give Jana a call. We'd rather double-check than have anything catch you off guard.
+      </div>
+    </section>
+
+    <!-- ======= CONTACTS ======= -->
+    <section id="contacts">
+      <div class="section-head">
+        <span class="section-icon" aria-hidden="true">📇</span>
+        <div>
+          <h2 data-lang-block="cs">Klíčové kontakty</h2>
+          <h2 data-lang-block="en">Key contacts</h2>
+        </div>
+      </div>
+      <p class="section-intro" data-lang-block="cs">Když nevíte, koho oslovit, napište Janě — předá to dál. Vážně.</p>
+      <p class="section-intro" data-lang-block="en">If you're not sure who to ask, write to Jana — she'll route it. Really.</p>
+      <div class="contact-grid">
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🤝</span>
+            <span data-lang="cs">HR · Jana — váš první kontakt</span>
+            <span data-lang="en">HR · Jana — your first contact</span>
+          </h3>
+          <p><strong>Jana Budínová</strong></p>
+          <p data-lang-block="cs">Kontaktní osoba pro nové i stávající kolegy. Pomůže s nástupem, ubytováním, relokací, formalitami i s tím, na koho v centru se obrátit. U zahraničních kolegů provází i pobytovými záležitostmi.</p>
+          <p data-lang-block="en">Your point of contact for new and existing colleagues. Helps with onboarding, accommodation, relocation, formalities and routing you to the right person at the centre. For colleagues from abroad, also guides you through residence formalities.</p>
+          <p>📞 <a href="tel:+420724874274">+420 724 874 274</a><br>
+          ✉️ <a href="mailto:budinova@alga.cz">budinova@alga.cz</a></p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">💶</span>
+            <span data-lang="cs">HR · Mzdy a smlouvy</span>
+            <span data-lang="en">HR · Payroll &amp; contracts</span>
+          </h3>
+          <p><strong>Markéta Stefanová</strong></p>
+          <p data-lang-block="cs">Pracovní smlouvy, výplatní pásky, docházka, výpočty mezd, daňové formuláře a evidence dovolené.</p>
+          <p data-lang-block="en">Employment contracts, payslips, attendance, salary calculations, tax forms and leave records.</p>
+          <p>📞 <a href="tel:+420384340415">+420 384 340 415</a><br>
+          ✉️ <a href="mailto:stefanova@alga.cz">stefanova@alga.cz</a></p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🏛️</span>
+            <span data-lang="cs">Vedení centra</span>
+            <span data-lang="en">Centre management</span>
+          </h3>
+          <p data-lang-block="cs"><strong>Ředitel:</strong> Prof. Ing. Roman Sobotka, Ph.D.<br><strong>Manažer centra:</strong> Ing. Tomáš Budín</p>
+          <p data-lang-block="en"><strong>Director:</strong> Prof. Ing. Roman Sobotka, Ph.D.<br><strong>Centre Manager:</strong> Ing. Tomáš Budín</p>
+          <p>📞 <a href="tel:+420384340412">+420 384 340 412</a><br>
+          ✉️ <a href="mailto:info@alga.cz">info@alga.cz</a></p>
+        </div>
+      </div>
+      <div class="friendly-note" data-lang-block="cs">
+        <strong>Vedoucí laboratoře / školitel</strong> je váš první kontakt pro vědeckou práci, plán experimentů, přístup k přístrojům a hodnocení. HR řeší pracovní stránku — od nástupu po dovolenou.
+      </div>
+      <div class="friendly-note" data-lang-block="en">
+        <strong>Your lab head / supervisor</strong> is your first contact for the science — experimental plans, equipment access and evaluations. HR handles the employment side — from your start through holidays and beyond.
+      </div>
+    </section>
+
+    <!-- ======= WORK · SALARY · LEAVE ======= -->
+    <section id="work">
+      <div class="section-head">
+        <span class="section-icon" aria-hidden="true">💼</span>
+        <div>
+          <h2 data-lang-block="cs">Mzda, docházka a dovolená</h2>
+          <h2 data-lang-block="en">Salary, attendance &amp; leave</h2>
+        </div>
+      </div>
+      <p class="section-intro" data-lang-block="cs">Krátká orientace v tom, jak u nás funguje pracovní den, výplata a volno.</p>
+      <p class="section-intro" data-lang-block="en">A short orientation in how the working day, payroll and leave work here.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">💶</span>
+            <span data-lang="cs">Mzda a výplatní páska</span>
+            <span data-lang="en">Salary and payslip</span>
+          </h3>
+          <p data-lang-block="cs">Čistá mzda = hrubá − sociální − zdravotní − nemocenské − daň + uplatněné slevy. Výplata chodí na váš český účet zpravidla do 10. dne následujícího měsíce. Výplatní pásku dostanete každý měsíc.</p>
+          <p data-lang-block="en">Net salary = gross − social security − health insurance − sickness insurance − income tax + applied tax reliefs. Salary lands on your Czech bank account by the 10th of the following month. You'll receive a monthly payslip.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🕘</span>
+            <span data-lang="cs">Pracovní doba</span>
+            <span data-lang="en">Working hours</span>
+          </h3>
+          <p data-lang-block="cs">Plný úvazek je 40 hodin týdně. Máme pružnou pracovní dobu — denní jádro si domluvíte s vedoucím. Práce v laboratoři se přirozeně řídí během experimentů, takže buďte v kontaktu se svým týmem.</p>
+          <p data-lang-block="en">Full-time is 40 hours per week. We work with flexible hours — the daily core is agreed with your supervisor. Lab work naturally follows experiments, so stay in close touch with your team.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🗓️</span>
+            <span data-lang="cs">Docházka</span>
+            <span data-lang="en">Attendance</span>
+          </h3>
+          <p data-lang-block="cs">Docházku si každý vede sám v elektronickém systému. Nepřítomnosti — dovolená, nemoc, home office, pracovní cesty, konference — domlouváte s vedoucím a označujete v systému. Měsíční evidenci uzavírá HR.</p>
+          <p data-lang-block="en">Each person records their own attendance in the electronic system. Absences — leave, sickness, home office, business trips, conferences — are agreed with your supervisor and marked in the system. HR closes the monthly record.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🌴</span>
+            <span data-lang="cs">Dovolená</span>
+            <span data-lang="en">Annual leave</span>
+          </h3>
+          <p data-lang-block="cs">Naši zaměstnanci mají <strong>6 týdnů placené dovolené</strong> ročně (poměrně u kratšího úvazku nebo neúplného roku). Plánujte ji s vedoucím v předstihu, hlavně kolem hlavních experimentů a konferencí.</p>
+          <p data-lang-block="en">Our employees receive <strong>6 weeks of paid annual leave</strong> per year (pro-rated for part-time or partial year). Plan it with your supervisor in advance — especially around key experiments and conferences.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🤒</span>
+            <span data-lang="cs">Nemoc a lékař</span>
+            <span data-lang="en">Sick leave &amp; doctor visits</span>
+          </h3>
+          <p data-lang-block="cs">Když nemůžete přijít do práce, dejte co nejdřív vědět vedoucímu a HR. Při delší nemoci vystaví praktický lékař elektronickou neschopenku — automaticky se odešle nám i ČSSZ.</p>
+          <p data-lang-block="en">If you can't come in, let your supervisor and HR know as soon as possible. For longer illness, your GP issues an electronic sick note that is sent automatically to us and to the social-security office.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🎁</span>
+            <span data-lang="cs">Benefity</span>
+            <span data-lang="en">Benefits</span>
+          </h3>
+          <p data-lang-block="cs">Příspěvek na stravování (přes mzdu), možnost výkonnostních odměn, podpora konferenčních cest, jazykové kurzy na vyžádání a přístup k benefitnímu programu Akademie věd ČR.</p>
+          <p data-lang-block="en">Meal contribution (paid through payroll), performance bonuses, conference travel support, language courses on request, and access to the Czech Academy of Sciences benefits programme.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= TAX ======= -->
+    <section id="tax">
+      <div class="section-head">
+        <span class="section-icon" aria-hidden="true">🧾</span>
+        <div>
+          <h2 data-lang-block="cs">Daň z příjmů (2026)</h2>
+          <h2 data-lang-block="en">Personal income tax (2026)</h2>
+        </div>
+      </div>
+      <p class="section-intro" data-lang-block="cs">Stručný přehled nejčastějších otázek. Konkrétní situaci — více zaměstnavatelů, dohody, odpočty — vždy řeší mzdová účtárna (Markéta) nebo daňový poradce.</p>
+      <p class="section-intro" data-lang-block="en">A short overview of the most common questions. Specific cases — multiple employers, additional contracts, deductions — are always handled by payroll (Markéta) or a tax advisor.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">📊</span>
+            <span data-lang="cs">Sazby a sleva 2026</span>
+            <span data-lang="en">2026 rates and basic relief</span>
+          </h3>
+          <p data-lang-block="cs">Dvousazbová daň: <strong>15 %</strong> do zákonného limitu (cca 1,76 mil. Kč ročně) a <strong>23 %</strong> nad něj. Základní sleva na poplatníka pro rok 2026 je <strong>30 840 Kč</strong> ročně.</p>
+          <p data-lang-block="en">Two-rate progressive tax: <strong>15%</strong> up to the legal threshold (about CZK 1.76 million/year) and <strong>23%</strong> above. Standard taxpayer relief for 2026 is <strong>CZK 30,840</strong> per year.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🧮</span>
+            <span data-lang="cs">Povinné odvody zaměstnance</span>
+            <span data-lang="en">Employee mandatory contributions</span>
+          </h3>
+          <p data-lang-block="cs">Z hrubé mzdy jdou: <strong>7,1 %</strong> sociální + <strong>4,5 %</strong> zdravotní + <strong>0,6 %</strong> nemocenské. Zaměstnavatel hradí svou část navrch.</p>
+          <p data-lang-block="en">From gross salary: <strong>7.1%</strong> social + <strong>4.5%</strong> health + <strong>0.6%</strong> sickness insurance. The employer pays its share on top.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">📑</span>
+            <span data-lang="cs">Roční zúčtování vs. vlastní přiznání</span>
+            <span data-lang="en">Annual settlement vs. own return</span>
+          </h3>
+          <p data-lang-block="cs">Pokud máte celý rok jen jednoho zaměstnavatele, mzdová účtárna vám obvykle udělá roční zúčtování. Při více zaměstnavatelích, dalších příjmech nebo nestandardních slevách si přiznání podáváte sami — standardně do 1. dubna (s prodloužením při elektronickém podání nebo přes daňového poradce).</p>
+          <p data-lang-block="en">If you have only one employer for the whole year, payroll usually performs the annual settlement. With multiple employers, additional income or non-standard reliefs, you file your own return — typically by 1 April (with extensions for electronic filing or via a tax advisor).</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">👨‍👩‍👧</span>
+            <span data-lang="cs">Rodinné slevy a běžné odpočty</span>
+            <span data-lang="en">Family reliefs and common deductions</span>
+          </h3>
+          <p data-lang-block="cs">Daňové zvýhodnění na děti 2026: cca 15 204 Kč (1. dítě), 22 320 Kč (2. dítě), 27 840 Kč (3. a další). Sleva na manžela/manželku 24 840 Kč při příjmu do 68 000 Kč/rok a péči o dítě do 3 let. Dále odpočty za dary, doplňkové penzijní spoření, životní pojištění a vybrané úroky z bytového úvěru.</p>
+          <p data-lang-block="en">Child credits in 2026: ~CZK 15,204 (1st), 22,320 (2nd), 27,840 (3rd+). Spouse relief CZK 24,840 if spouse earns under CZK 68,000/year and cares for a child under 3. Plus deductions for donations, supplementary pension, life insurance and selected housing-loan interest.</p>
+        </div>
+        <div class="card" data-only-en>
+          <h3>
+            <span class="card-icon" aria-hidden="true">🌍</span>
+            <span data-lang="en">Tax residence (for international colleagues)</span>
+          </h3>
+          <p data-lang-block="en">If your permanent home or centre of vital interests is in the Czech Republic, or you spend at least 183 days here in a calendar year, you're typically a Czech tax resident. Otherwise — non-resident, taxed only on Czech-source income. Double-tax treaties may apply to your home country.</p>
+        </div>
+        <div class="card" data-only-en>
+          <h3>
+            <span class="card-icon" aria-hidden="true">🪪</span>
+            <span data-lang="en">Certificate of tax domicile</span>
+          </h3>
+          <p data-lang-block="en">If you need to prove Czech tax residence to a foreign tax authority, you can apply for a Certificate of Tax Domicile at your local tax office. HR will issue the employment confirmation you need to attach.</p>
+        </div>
+      </div>
+      <div class="friendly-note" data-lang-block="cs">
+        Sazby, limity i termíny se každý rok mění. Markéta vždy pracuje s aktuálně platnou verzí, takže pokud si nejste jistí, raději se zeptejte.
+      </div>
+      <div class="friendly-note" data-lang-block="en">
+        Rates, thresholds and deadlines change every year. Markéta always uses the current valid version — if you're unsure, just ask.
+      </div>
+      <div class="source-list">
+        <a href="https://www.financnisprava.cz/" target="_blank" rel="noopener noreferrer">financnisprava.cz</a>
+        <a href="https://taxsummaries.pwc.com/czech-republic/individual/taxes-on-personal-income" target="_blank" rel="noopener noreferrer">PwC · Czech individual tax</a>
+      </div>
+    </section>
+
+    <!-- ======= RESIDENCE & VISA (EN ONLY) ======= -->
+    <section id="residence" data-only-en>
+      <div class="section-head">
+        <span class="section-icon" aria-hidden="true">🛂</span>
+        <div>
+          <h2 data-lang-block="en">Residence &amp; visa — we go through it together</h2>
+        </div>
+      </div>
+      <p class="section-intro" data-lang-block="en">
+        If you're moving to the Czech Republic, the residence side of things looks more complicated than it really is — because we walk through it with you.
+        HR coordinates the visits to the Foreign Police and the OAMP office (Ministry of Interior), helps with appointments and is happy to come along when it's useful.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🇪🇺</span>
+            <span data-lang="en">EU / EFTA citizens</span>
+          </h3>
+          <p data-lang-block="en">No visa or work permit is needed. For longer stays, a Certificate of Temporary Residence is recommended — it makes banking, healthcare and family registrations much smoother. We help you prepare the application and book the OAMP appointment.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🔬</span>
+            <span data-lang="en">Researchers from third countries</span>
+          </h3>
+          <p data-lang-block="en">The standard pathway is the long-term residence permit for the purpose of scientific research, based on a Hosting Agreement we issue. The permit is valid up to 2 years and gives free access to the Czech labour market — no separate work permit. HR prepares the hosting agreement together with you.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🪪</span>
+            <span data-lang="en">Non-research staff from third countries</span>
+          </h3>
+          <p data-lang-block="en">For technical, administrative and other non-research roles, the typical permit is the Employee Card (zaměstnanecká karta) — a combined work-and-residence permit. HR coordinates the steps with you.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">📍</span>
+            <span data-lang="en">Registering your address (HR coordinates)</span>
+          </h3>
+          <p data-lang-block="en">Once you arrive, your place of residence needs to be registered. We don't leave you to handle this alone — HR coordinates the Foreign Police and OAMP visits, helps with the timing and gets the right paperwork ready.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">📷</span>
+            <span data-lang="en">Biometrics &amp; residence card</span>
+          </h3>
+          <p data-lang-block="en">After arrival you'll book a Ministry of Interior appointment for biometrics (fingerprints and a photo). The biometric residence card is then ready to collect within roughly 30–60 days. HR helps you set this up and reminds you of follow-up steps.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">👨‍👩‍👧</span>
+            <span data-lang="en">Family members</span>
+          </h3>
+          <p data-lang-block="en">A spouse, registered partner and minor children can apply for residence on family-reunion grounds, linked to your status. We can help you prepare the document checklist (marriage and birth certificates with apostille or superlegalisation, certified Czech translations).</p>
+        </div>
+      </div>
+      <div class="friendly-note" data-lang-block="en">
+        <strong>The short version:</strong> just keep us in the loop on your travel dates. HR handles the legwork on appointments, paperwork and timing — you focus on settling in.
+      </div>
+      <div class="source-list">
+        <a href="https://www.euraxess.cz/" target="_blank" rel="noopener noreferrer">EURAXESS Czech Republic</a>
+        <a href="https://ipc.gov.cz/en/" target="_blank" rel="noopener noreferrer">Czech Immigration Portal</a>
+        <a href="https://www.mvcr.cz/mvcren/" target="_blank" rel="noopener noreferrer">Ministry of Interior (MV ČR)</a>
+      </div>
+    </section>
+
+    <!-- ======= LAB CULTURE ======= -->
+    <section id="culture">
+      <div class="section-head">
+        <span class="section-icon" aria-hidden="true">🧪</span>
+        <div>
+          <h2 data-lang-block="cs">Kultura v laboratořích</h2>
+          <h2 data-lang-block="en">Lab culture</h2>
+        </div>
+      </div>
+      <p class="section-intro" data-lang-block="cs">Pár jednoduchých zvyků, díky kterým se rychle zabydlíte a budete pracovat bezpečně.</p>
+      <p class="section-intro" data-lang-block="en">A few simple habits that help you settle in quickly and work safely.</p>
+      <div class="quick-grid">
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">👋</span>
+            <span data-lang="cs">Pozdrav a otevřená komunikace</span>
+            <span data-lang="en">Say hi, ask anything</span>
+          </h3>
+          <p data-lang-block="cs">Pozdravujte při vstupu do místností a kanceláří. Pracujeme dvojjazyčně — klidně si řekněte o češtinu pomalu nebo o přepnutí do angličtiny.</p>
+          <p data-lang-block="en">Greet colleagues when entering rooms or offices. We work in two languages — feel free to ask people to slow down or switch to English.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🛠️</span>
+            <span data-lang="cs">Nejdřív zaškolení</span>
+            <span data-lang="en">Train before you touch</span>
+          </h3>
+          <p data-lang-block="cs">Žádný přístroj nepoužívejte bez místního zaškolení a souhlasu vedoucího — i kdybyste podobný používali jinde. SOP a laboratorní deník nejsou volitelné.</p>
+          <p data-lang-block="en">No instrument is used without local training and supervisor approval — even if you've used a similar one elsewhere. SOPs and the lab notebook are not optional.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🤝</span>
+            <span data-lang="cs">Sdílené zdroje</span>
+            <span data-lang="en">Shared resources</span>
+          </h3>
+          <p data-lang-block="cs">Používejte přístroje a spotřebák své skupiny. Když potřebujete cokoli z jiné laboratoře, nejprve se zeptejte odpovědné osoby. Kde je rezervační systém, používejte ho.</p>
+          <p data-lang-block="en">Use the equipment and consumables of your own group. If you need something from another lab, ask the responsible person first. Where there's a booking system, use it.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🚨</span>
+            <span data-lang="cs">Závady hlaste hned</span>
+            <span data-lang="en">Report issues immediately</span>
+          </h3>
+          <p data-lang-block="cs">Alarm mrazáku, únik vody, rozbité sklo, neobvyklý zápach — okamžitě hlaste vedoucímu laboratoře a údržbě. Rychlejší hlášení = menší škoda.</p>
+          <p data-lang-block="en">Freezer alarms, water leaks, broken glass, unusual smells — report to your lab manager and maintenance straight away. Faster reporting = less damage.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">📚</span>
+            <span data-lang="cs">Půjčujte si zodpovědně</span>
+            <span data-lang="en">Borrow responsibly</span>
+          </h3>
+          <p data-lang-block="cs">Vypůjčené věci vracejte včas. Když si je potřebujete nechat déle, zanechte u nich jasnou cedulku. Stejné pravidlo platí pro literaturu i sdílené disky.</p>
+          <p data-lang-block="en">Return borrowed items on time. If you need to keep them longer, leave a clear note. Same applies to literature and shared drives.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🎯</span>
+            <span data-lang="cs">Směřujte k samostatnosti</span>
+            <span data-lang="en">Aim for independence</span>
+          </h3>
+          <p data-lang-block="cs">Dělejte si poznámky, ptejte se a pište si vlastní SOP. Cílem je, abyste se co nejdřív cítili samostatně a bezpečně.</p>
+          <p data-lang-block="en">Take notes, ask questions and write your own SOPs. The goal is for you to feel confident and safe working independently as soon as possible.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= PRACTICAL ======= -->
+    <section id="practical">
+      <div class="section-head">
+        <span class="section-icon" aria-hidden="true">🛒</span>
+        <div>
+          <h2 data-lang-block="cs">Praktické info pro každodenní život</h2>
+          <h2 data-lang-block="en">Practical info for daily life</h2>
+        </div>
+      </div>
+      <p class="section-intro" data-lang-block="cs">Pár užitečných věcí pro první týdny v Třeboni.</p>
+      <p class="section-intro" data-lang-block="en">A few useful things for the first weeks in Třeboň.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🏦</span>
+            <span data-lang="cs">Banka</span>
+            <span data-lang="en">Bank account</span>
+          </h3>
+          <p data-lang-block="cs">Mzdu vám pošleme na český účet. V Třeboni jsou pobočky Česká spořitelna, Komerční banka a ČSOB; oblíbené jsou i Fio a Raiffeisen. Doneste si OP/pas, smlouvu a české číslo.</p>
+          <p data-lang-block="en">Salary is paid to a Czech bank account. In Třeboň you'll find Česká spořitelna, Komerční banka and ČSOB; Fio and Raiffeisen are also popular. Bring your ID/passport, contract and a Czech mobile number.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">📱</span>
+            <span data-lang="cs">Telefon a internet</span>
+            <span data-lang="en">Phone and internet</span>
+          </h3>
+          <p data-lang-block="cs">Předplacenka i tarif u O2, T-Mobile nebo Vodafone. Třeboň má dobré pokrytí 4G/5G i optikou — domácí internet doporučujeme řešit s ubytovatelem.</p>
+          <p data-lang-block="en">Prepaid SIM or contract with O2, T-Mobile or Vodafone. Třeboň has solid 4G/5G and fibre coverage — for home internet, ask your accommodation provider.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🩺</span>
+            <span data-lang="cs">Lékaři a lékárny</span>
+            <span data-lang="en">Doctors and pharmacies</span>
+          </h3>
+          <p data-lang-block="cs">Po nástupu se co nejdřív registrujte u praktického lékaře, zubaře a (u žen) gynekologa. Recepty jsou většinou elektronické (eRecept) — vyzvednete v jakékoli lékárně podle SMS kódu a OP.</p>
+          <p data-lang-block="en">After joining us, register with a GP, dentist and (for women) gynaecologist as soon as possible. Most prescriptions are electronic (eRecept) — collect at any pharmacy with your ID and SMS code.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🚆</span>
+            <span data-lang="cs">Doprava</span>
+            <span data-lang="en">Transport</span>
+          </h3>
+          <p data-lang-block="cs">Vlakem a autobusem do Českých Budějovic za ~30 minut, do Prahy ~2,5 hodiny, do Vídně ~3 hodiny. Po městě a okolo rybníků se hodí kolo. Spojení: <a href="https://idos.cz" target="_blank" rel="noopener noreferrer">idos.cz</a>.</p>
+          <p data-lang-block="en">By train or bus to České Budějovice in ~30 min, to Prague ~2.5 h, to Vienna ~3 h. Around town and the ponds, a bike works really well. Schedules: <a href="https://idos.cz" target="_blank" rel="noopener noreferrer">idos.cz</a>.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🛍️</span>
+            <span data-lang="cs">Nákupy a každodenní věci</span>
+            <span data-lang="en">Groceries and daily essentials</span>
+          </h3>
+          <p data-lang-block="cs">Albert, Penny a Lidl jsou ve městě, k tomu farmářské trhy, pekárny, drogerie (Rossmann, Teta) a Česká pošta. Karty fungují skoro všude.</p>
+          <p data-lang-block="en">Albert, Penny and Lidl are in town, plus a farmers' market, bakeries, drugstores (Rossmann, Teta) and the post office (Česká pošta). Cards are accepted almost everywhere.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🚨</span>
+            <span data-lang="cs">Tísňové linky</span>
+            <span data-lang="en">Emergency numbers</span>
+          </h3>
+          <p data-lang-block="cs"><strong>112</strong> — univerzální tísňová linka (i v angličtině)<br><strong>155</strong> — záchranná služba<br><strong>158</strong> — policie · <strong>150</strong> — hasiči</p>
+          <p data-lang-block="en"><strong>112</strong> — single emergency number (English supported)<br><strong>155</strong> — medical emergency<br><strong>158</strong> — police · <strong>150</strong> — fire</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= LIFE ======= -->
+    <section id="life">
+      <div class="section-head">
+        <span class="section-icon" aria-hidden="true">🌿</span>
+        <div>
+          <h2 data-lang-block="cs">Život v Třeboni</h2>
+          <h2 data-lang-block="en">Life in Třeboň</h2>
+        </div>
+      </div>
+      <p class="section-intro" data-lang-block="cs">Třeboň je malé historické město v jižních Čechách obklopené rybníky, lesy a biosférickou rezervací UNESCO. Klidné tempo, příroda za rohem a silná kulturní tradice.</p>
+      <p class="section-intro" data-lang-block="en">Třeboň is a small historic town in South Bohemia, surrounded by ponds, forests and a UNESCO biosphere reserve. A calm pace, nature on the doorstep and a strong cultural tradition.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🚴</span>
+            <span data-lang="cs">Příroda a sport</span>
+            <span data-lang="en">Nature and sport</span>
+          </h3>
+          <p data-lang-block="cs">Cyklostezky a turistické trasy kolem rybníků (Svět, Rožmberk), borovými lesy i rašeliništi. Plavání, běh, kanoistika i bruslení patří mezi naše oblíbené aktivity.</p>
+          <p data-lang-block="en">Cycle paths and walking trails around the famous fishponds (Svět, Rožmberk), through pine forests and peat bogs. Swimming, running, paddling and ice-skating are favourites among the team.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🏰</span>
+            <span data-lang="cs">Kultura a historie</span>
+            <span data-lang="en">Culture and history</span>
+          </h3>
+          <p data-lang-block="cs">Renesanční zámek, historické náměstí, pivovar a Schwarzenberská hrobka jsou pěšky z centra. K Třeboni patří podzimní výlovy rybníků, letní koncerty i filmový festival.</p>
+          <p data-lang-block="en">Renaissance castle, historic square, brewery and the Schwarzenberg tomb are within walking distance. Třeboň is famous for autumn pond harvests, summer concerts and the film festival.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">♨️</span>
+            <span data-lang="cs">Lázně a wellness</span>
+            <span data-lang="en">Spa and wellness</span>
+          </h3>
+          <p data-lang-block="cs">Třeboň je tradiční slatinné lázeňské město. Lázně, bazény a sauny jsou přístupné i obyvatelům — ideální pro odpočinek po práci.</p>
+          <p data-lang-block="en">Třeboň is a traditional peat-spa town. Spas, swimming pools and saunas are accessible to residents — perfect for unwinding after work.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">👨‍👩‍👧</span>
+            <span data-lang="cs">Rodina a školy</span>
+            <span data-lang="en">Family and schools</span>
+          </h3>
+          <p data-lang-block="cs">Máme jesle, mateřské, základní i střední školy. Kapacita jeslí bývá omezená — žádost je dobré podat dopředu. Mezinárodní školy jsou v Českých Budějovicích a v Praze.</p>
+          <p data-lang-block="en">There are nurseries, kindergartens, primary and secondary schools. Nursery capacity is limited — apply early. International schools are available in České Budějovice and Prague.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🗺️</span>
+            <span data-lang="cs">Výlety v okolí</span>
+            <span data-lang="en">Day trips nearby</span>
+          </h3>
+          <p data-lang-block="cs">České Budějovice, Český Krumlov, zámek Hluboká, Šumava i rakouské hranice jsou autem snadno dostupné. Vídeň i Praha jsou na pár hodin cesty.</p>
+          <p data-lang-block="en">České Budějovice, Český Krumlov, Hluboká Castle, the Šumava mountains and the Austrian border are an easy drive away. Vienna and Prague are a few hours by car.</p>
+        </div>
+        <div class="card">
+          <h3>
+            <span class="card-icon" aria-hidden="true">🗣️</span>
+            <span data-lang="cs">Češtinu vás rádi naučíme</span>
+            <span data-lang="en">Czech language</span>
+          </h3>
+          <p data-lang-block="cs">V centru se běžně domluvíte česky i anglicky. Pro kolegy z ciziny rádi zařídíme jazykový kurz — ozvěte se Janě.</p>
+          <p data-lang-block="en">English is widely used at the centre, but a bit of Czech makes daily life much easier. For international colleagues, we're happy to arrange a language course — just write to Jana.</p>
+        </div>
+      </div>
+      <div class="highlight" data-lang-block="cs">
+        Vítejte v Třeboni. Tým Algatech je rád, že tu jste — s jakýmkoli dotazem, i drobným, klidně přijďte za HR.
+      </div>
+      <div class="highlight" data-lang-block="en">
+        Welcome to Třeboň. The Algatech team is glad to have you — please bring any question, however small, to HR.
+      </div>
+    </section>
+
+    <!-- ======= ASK HR FORM ======= -->
+    <section id="ask">
+      <div class="section-head">
+        <span class="section-icon" aria-hidden="true">💬</span>
+        <div>
+          <h2 data-lang-block="cs">Zeptejte se Jany</h2>
+          <h2 data-lang-block="en">Ask Jana a question</h2>
+        </div>
+      </div>
+      <p class="section-intro" data-lang-block="cs">Sepište svůj dotaz níže. Po odeslání se otevře váš e-mailový klient s předvyplněnou zprávou pro <a href="mailto:budinova@alga.cz">budinova@alga.cz</a>. Většinou odpovídáme do dvou pracovních dnů.</p>
+      <p class="section-intro" data-lang-block="en">Write your question below. When you click send, your email client opens with a pre-filled message to <a href="mailto:budinova@alga.cz">budinova@alga.cz</a>. We usually reply within two working days.</p>
+      <form id="askForm" novalidate>
+        <div class="form-grid">
+          <div>
+            <label for="askName" data-lang-block="cs">Vaše jméno</label>
+            <label for="askName" data-lang-block="en">Your name</label>
+            <input type="text" id="askName" name="askName" required autocomplete="name" />
+          </div>
+          <div>
+            <label for="askEmail" data-lang-block="cs">Váš e-mail (kam vám odpovíme)</label>
+            <label for="askEmail" data-lang-block="en">Your email (so we can reply)</label>
+            <input type="email" id="askEmail" name="askEmail" required autocomplete="email" />
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="askTopic" data-lang-block="cs">Téma</label>
+          <label for="askTopic" data-lang-block="en">Topic</label>
+          <select id="askTopic" name="askTopic">
+            <option value="" data-lang-block="cs">— vyberte téma —</option>
+            <option value="" data-lang-block="en">— select a topic —</option>
+            <option value="Nástup / smlouva" data-lang-block="cs">Nástup / smlouva</option>
+            <option value="Onboarding / contract" data-lang-block="en">Onboarding / contract</option>
+            <option value="Mzda / dovolená / docházka" data-lang-block="cs">Mzda / dovolená / docházka</option>
+            <option value="Payroll / leave / attendance" data-lang-block="en">Payroll / leave / attendance</option>
+            <option value="Daně" data-lang-block="cs">Daně</option>
+            <option value="Tax" data-lang-block="en">Tax</option>
+            <option value="Zdravotní pojištění / lékaři" data-lang-block="cs">Zdravotní pojištění / lékaři</option>
+            <option value="Health insurance / doctors" data-lang-block="en">Health insurance / doctors</option>
+            <option value="Ubytování / život v Třeboni" data-lang-block="cs">Ubytování / život v Třeboni</option>
+            <option value="Accommodation / life in Třeboň" data-lang-block="en">Accommodation / life in Třeboň</option>
+            <option value="Vízum / pobyt (zahraniční kolegové)" data-lang-block="cs">Vízum / pobyt (zahraniční kolegové)</option>
+            <option value="Visa / residence" data-lang-block="en">Visa / residence</option>
+            <option value="Jiné" data-lang-block="cs">Jiné</option>
+            <option value="Other" data-lang-block="en">Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="askMessage" data-lang-block="cs">Váš dotaz</label>
+          <label for="askMessage" data-lang-block="en">Your question</label>
+          <textarea id="askMessage" name="askMessage" required placeholder="..." ></textarea>
+          <p class="form-help" data-lang-block="cs">Tip: napište i datum nástupu nebo jméno vedoucího — odpovíme rychleji.</p>
+          <p class="form-help" data-lang-block="en">Tip: include your start date or supervisor's name — we'll reply faster.</p>
+        </div>
+        <div class="form-row" style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button class="btn btn-primary" type="submit" id="askSend">
+            <span data-lang="cs">Odeslat e-mailem</span>
+            <span data-lang="en">Send via email</span>
+          </button>
+          <button class="btn btn-secondary" type="button" id="askCopy">
+            <span data-lang="cs">Místo toho zkopírovat</span>
+            <span data-lang="en">Copy to clipboard instead</span>
+          </button>
+        </div>
+        <div class="form-status" id="askStatus" role="status" aria-live="polite"></div>
+      </form>
+      <p class="form-help" style="margin-top:18px;" data-lang-block="cs">Raději telefon? Volejte Janě na <a href="tel:+420724874274">+420 724 874 274</a> (po–pá).</p>
+      <p class="form-help" style="margin-top:18px;" data-lang-block="en">Prefer a call? Phone Jana at <a href="tel:+420724874274">+420 724 874 274</a> (Mon–Fri).</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p data-lang-block="cs"><strong>Centrum Algatech</strong> — Mikrobiologický ústav AV ČR, v.&nbsp;v.&nbsp;i. · Novohradská 237, 379 01 Třeboň · <a href="https://www.alga.cz" target="_blank" rel="noopener noreferrer">www.alga.cz</a></p>
+    <p data-lang-block="en"><strong>Centre Algatech</strong> — Institute of Microbiology, CAS, v.&nbsp;v.&nbsp;i. · Novohradská 237, 379 01 Třeboň, Czech Republic · <a href="https://www.alga.cz" target="_blank" rel="noopener noreferrer">www.alga.cz</a></p>
+    <p data-lang-block="cs">Tato stránka má informativní charakter. Aktuální postupy ověříme s vámi v HR (Jana Budínová), na mzdové účtárně (Markéta Stefanová) nebo s příslušným úřadem. Naposledy aktualizováno v dubnu 2026.</p>
+    <p data-lang-block="en">This page is informational. We'll always confirm current procedures together — with HR (Jana Budínová), payroll (Markéta Stefanová) or the relevant authority. Last updated April 2026.</p>
+  </footer>
+
+  <script>
+    (function () {
+      var html = document.documentElement;
+      var btnEn = document.getElementById('btn-en');
+      var btnCs = document.getElementById('btn-cs');
+      function setLang(lang) {
+        if (lang === 'en') {
+          html.classList.add('lang-en');
+          html.classList.remove('lang-cs');
+          html.setAttribute('lang', 'en');
+          btnEn.classList.add('active'); btnEn.setAttribute('aria-pressed', 'true');
+          btnCs.classList.remove('active'); btnCs.setAttribute('aria-pressed', 'false');
+        } else {
+          html.classList.add('lang-cs');
+          html.classList.remove('lang-en');
+          html.setAttribute('lang', 'cs');
+          btnCs.classList.add('active'); btnCs.setAttribute('aria-pressed', 'true');
+          btnEn.classList.remove('active'); btnEn.setAttribute('aria-pressed', 'false');
+        }
+        try { localStorage.setItem('algatech-lang', lang); } catch (e) {}
+      }
+      btnCs.addEventListener('click', function () { setLang('cs'); });
+      btnEn.addEventListener('click', function () { setLang('en'); });
+      var saved = null;
+      try { saved = localStorage.getItem('algatech-lang'); } catch (e) {}
+      if (saved === 'cs' || saved === 'en') setLang(saved);
+
+      // ===== Ask HR form =====
+      var form = document.getElementById('askForm');
+      var status = document.getElementById('askStatus');
+      var copyBtn = document.getElementById('askCopy');
+
+      function buildMail() {
+        var name = document.getElementById('askName').value.trim();
+        var email = document.getElementById('askEmail').value.trim();
+        var topic = document.getElementById('askTopic').value;
+        var msg = document.getElementById('askMessage').value.trim();
+        var lang = html.classList.contains('lang-en') ? 'en' : 'cs';
+        var subjectBase = lang === 'en' ? 'Algatech onboarding question' : 'Dotaz z onboarding webu Algatech';
+        var subject = topic ? subjectBase + ' — ' + topic : subjectBase;
+        var greet = lang === 'en' ? 'Hello Jana,' : 'Dobrý den, Jano,';
+        var sigName = lang === 'en' ? 'Best regards,\n' : 'S pozdravem,\n';
+        var bodyLines = [ greet, '', msg, '', sigName + name, email ];
+        return {
+          subject: subject,
+          body: bodyLines.join('\n'),
+          plain: 'To: budinova@alga.cz\nSubject: ' + subject + '\n\n' + bodyLines.join('\n')
+        };
+      }
+      function showStatus(text, kind) {
+        status.textContent = text;
+        status.classList.add('is-visible');
+        status.style.background = kind === 'warn' ? 'var(--warn-soft)' : 'var(--green-soft)';
+        status.style.color = kind === 'warn' ? 'var(--warn)' : 'var(--green-dark)';
+      }
+      function validate() {
+        var name = document.getElementById('askName').value.trim();
+        var email = document.getElementById('askEmail').value.trim();
+        var msg = document.getElementById('askMessage').value.trim();
+        var lang = html.classList.contains('lang-en') ? 'en' : 'cs';
+        if (!name || !email || !msg) {
+          showStatus(lang === 'en' ? 'Please fill in your name, email and the question.' : 'Vyplňte prosím jméno, e-mail i text dotazu.', 'warn');
+          return false;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          showStatus(lang === 'en' ? 'That email does not look right, please check it.' : 'E-mail nevypadá správně, zkontrolujte ho prosím.', 'warn');
+          return false;
+        }
+        return true;
+      }
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        if (!validate()) return;
+        var lang = html.classList.contains('lang-en') ? 'en' : 'cs';
+        var m = buildMail();
+        var url = 'mailto:budinova@alga.cz?subject=' + encodeURIComponent(m.subject) + '&body=' + encodeURIComponent(m.body);
+        window.location.href = url;
+        showStatus(lang === 'en'
+          ? 'Your email client has been opened with a pre-filled message to Jana. Just hit send. If nothing opened, use the “copy to clipboard” button.'
+          : 'Otevřeli jsme váš e-mailový klient s předvyplněnou zprávou pro Janu. Stačí odeslat. Pokud se klient neotevřel, použijte tlačítko „zkopírovat".', 'ok');
+      });
+      copyBtn.addEventListener('click', function () {
+        if (!validate()) return;
+        var lang = html.classList.contains('lang-en') ? 'en' : 'cs';
+        var m = buildMail();
+        var ok = function () {
+          showStatus(lang === 'en'
+            ? 'Message copied to clipboard. Paste it into your email to budinova@alga.cz.'
+            : 'Zpráva zkopírována do schránky. Vložte ji do svého e-mailu na budinova@alga.cz.', 'ok');
+        };
+        var fail = function () {
+          showStatus(lang === 'en'
+            ? 'Copy failed, please copy manually. Message: ' + m.plain
+            : 'Kopírování se nezdařilo, zkopírujte ručně. Zpráva: ' + m.plain, 'warn');
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(m.plain).then(ok, fail);
+        } else {
+          try {
+            var ta = document.createElement('textarea');
+            ta.value = m.plain;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            ok();
+          } catch (e) { fail(); }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

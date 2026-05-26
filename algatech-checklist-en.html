@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>New Employee Onboarding Checklist · Centre Algatech</title>
+<style>
+  :root {
+    --green-dark: #1b4332;
+    --green: #2d6a4f;
+    --algae: #4a9168;
+    --green-light: #74c69d;
+    --green-soft: #e3f1e7;
+    --green-pale: #f3faf5;
+    --ink: #1f2933;
+    --ink-soft: #4b5563;
+    --border: #d1d9d2;
+    --line: #2d6a4f;
+  }
+  @page {
+    size: A4;
+    margin: 14mm 13mm 14mm 13mm;
+    @bottom-left {
+      content: "Centre Algatech · Institute of Microbiology, CAS · Novohradská 237, 379 01 Třeboň, Czech Republic";
+      font-family: 'Helvetica', sans-serif;
+      font-size: 7.5pt;
+      color: #4b5563;
+    }
+    @bottom-right {
+      content: "Page " counter(page) " / " counter(pages);
+      font-family: 'Helvetica', sans-serif;
+      font-size: 7.5pt;
+      color: #4b5563;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    color: var(--ink);
+    font-size: 9.5pt;
+    line-height: 1.35;
+    margin: 0;
+  }
+  /* === HEADER === */
+  .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 3px solid var(--green);
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+  .brand {
+    color: var(--green-dark);
+  }
+  .brand-name {
+    font-size: 14pt;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    color: var(--green);
+    line-height: 1;
+  }
+  .brand-sub {
+    font-size: 8pt;
+    color: var(--ink-soft);
+    margin-top: 3px;
+  }
+  .doc-meta {
+    text-align: right;
+    font-size: 7.5pt;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+  .doc-meta strong { color: var(--green-dark); }
+
+  /* === TITLE === */
+  h1 {
+    font-size: 16pt;
+    color: var(--green-dark);
+    margin: 8px 0 2px 0;
+    letter-spacing: 0.2px;
+  }
+  .subtitle {
+    font-size: 9pt;
+    color: var(--ink-soft);
+    margin: 0 0 12px 0;
+  }
+
+  /* === EMPLOYEE INFO BLOCK === */
+  .employee-info {
+    background: var(--green-pale);
+    border: 1px solid var(--green-light);
+    border-left: 4px solid var(--green);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+  }
+  .employee-info h2 {
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--green-dark);
+    margin: 0 0 8px 0;
+    font-weight: 700;
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 22px;
+  }
+  .info-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 9pt;
+  }
+  .info-label {
+    flex: 0 0 40%;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .info-line {
+    flex: 1;
+    border-bottom: 1px solid var(--ink-soft);
+    height: 14pt;
+  }
+
+  /* === SECTION HEADERS === */
+  .section-title {
+    background: var(--green);
+    color: white;
+    font-size: 10pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    padding: 5px 10px;
+    margin: 16px 0 0 0;
+    border-radius: 4px 4px 0 0;
+  }
+  .section-title .kicker {
+    opacity: 0.7;
+    font-weight: 500;
+    margin-left: 8px;
+    font-size: 8.5pt;
+    letter-spacing: 0.5px;
+    text-transform: none;
+  }
+
+  /* === CHECKLIST TABLE === */
+  table.checklist {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0;
+    font-size: 9pt;
+  }
+  table.checklist thead th {
+    background: var(--green-soft);
+    color: var(--green-dark);
+    font-weight: 700;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 5px 6px;
+    text-align: left;
+    border-bottom: 1px solid var(--green-light);
+  }
+  table.checklist td {
+    padding: 6px 6px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.checklist tbody tr:nth-child(even) td {
+    background: #fafdfb;
+  }
+  .col-check { width: 18pt; text-align: center; }
+  .col-task  { width: auto; }
+  .col-resp  { width: 110pt; }
+  .col-date  { width: 60pt; }
+  .col-sig   { width: 80pt; }
+
+  .checkbox {
+    display: inline-block;
+    width: 11pt;
+    height: 11pt;
+    border: 1.5pt solid var(--green-dark);
+    border-radius: 2pt;
+    vertical-align: middle;
+  }
+  .col-resp { color: var(--ink-soft); font-size: 8.5pt; }
+  .col-resp strong { color: var(--green-dark); font-weight: 600; }
+  .task-note {
+    display: block;
+    font-size: 7.5pt;
+    color: var(--ink-soft);
+    margin-top: 1px;
+    font-style: italic;
+  }
+
+  /* === SIGNATURES === */
+  .signatures {
+    margin-top: 18px;
+    padding-top: 10px;
+    border-top: 1.5px solid var(--green);
+  }
+  .signatures h2 {
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--green-dark);
+    margin: 0 0 10px 0;
+    font-weight: 700;
+  }
+  .sig-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 22px;
+  }
+  .sig-block {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .sig-line {
+    border-top: 1px solid var(--ink);
+    margin-top: 26pt;
+    padding-top: 4px;
+    font-size: 8pt;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+  .sig-line strong { color: var(--green-dark); display:block; font-size: 8.5pt; font-weight: 700; }
+
+  /* === FORMAL FOOTER === */
+  .legal-note {
+    margin-top: 14px;
+    padding: 7px 10px;
+    background: var(--green-pale);
+    border-left: 3px solid var(--green-light);
+    font-size: 7.5pt;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+  .legal-note strong { color: var(--green-dark); }
+
+  /* avoid awkward breaks */
+  table.checklist, .section-title { page-break-inside: avoid; }
+  .signatures { page-break-inside: avoid; }
+  .employee-info { page-break-inside: avoid; }
+
+</style>
+</head>
+<body>
+
+<header class="doc-header">
+  <div class="brand">
+    <div class="brand-name">CENTRE ALGATECH</div>
+    <div class="brand-sub">Institute of Microbiology of the Czech Academy of Sciences · Novohradská 237, 379 01 Třeboň, Czech Republic</div>
+  </div>
+  <div class="doc-meta">
+    <div><strong>Document:</strong> Onboarding checklist</div>
+    <div><strong>Version:</strong> May 2026</div>
+    <div><strong>Issued by:</strong> HR — Markéta Stefanová / Jana Budínová</div>
+  </div>
+</header>
+
+<h1>New Employee Onboarding Checklist</h1>
+<p class="subtitle">Formal record of onboarding progress, mandatory training, access provisioning and document handover. One original goes to the employee, one to HR.</p>
+
+<!-- ===== EMPLOYEE INFO ===== -->
+<section class="employee-info">
+  <h2>Employee identification</h2>
+  <div class="info-grid">
+    <div class="info-row"><div class="info-label">Full name:</div><div class="info-line"></div></div>
+    <div class="info-row"><div class="info-label">Personnel number:</div><div class="info-line"></div></div>
+    <div class="info-row"><div class="info-label">Position:</div><div class="info-line"></div></div>
+    <div class="info-row"><div class="info-label">Laboratory / department:</div><div class="info-line"></div></div>
+    <div class="info-row"><div class="info-label">Supervisor:</div><div class="info-line"></div></div>
+    <div class="info-row"><div class="info-label">Start date:</div><div class="info-line"></div></div>
+    <div class="info-row"><div class="info-label">Employment type:</div><div class="info-line"></div></div>
+    <div class="info-row"><div class="info-label">Buddy / colleague guide:</div><div class="info-line"></div></div>
+  </div>
+</section>
+
+<!-- ===== SECTION A — BEFORE START ===== -->
+<div class="section-title">A · Before start <span class="kicker">— ready by the first working day</span></div>
+<table class="checklist">
+  <thead>
+    <tr>
+      <th class="col-check">✓</th>
+      <th class="col-task">Task</th>
+      <th class="col-resp">Responsible</th>
+      <th class="col-date">Date</th>
+      <th class="col-sig">Signature</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Start date agreed and employment contract drafted
+        <span class="task-note">pre-filled contract, taxpayer declaration, GDPR consent</span></td>
+      <td class="col-resp"><strong>Markéta</strong></td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Entry medical examination completed, certificate delivered
+        <span class="task-note">§59 Act No. 373/2011 Coll. — required before contract is signed</span></td>
+      <td class="col-resp"><strong>Markéta</strong></td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Workplace prepared — desk, office, chair
+        <span class="task-note">cleaning, keys, name tag on the door</span></td>
+      <td class="col-resp">Supervisor + admin</td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Computer ready / former PC reinstalled
+        <span class="task-note">working OS, accounts, e-mail, shared drives</span></td>
+      <td class="col-resp">IT + supervisor</td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Welcome pack prepared (Centre tote with PR materials)</td>
+      <td class="col-resp"><strong>Jana</strong></td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>For international colleagues: accommodation, relocation, immigration
+        <span class="task-note">Foreign Police, Ministry of Interior (OAMP), residence registration</span></td>
+      <td class="col-resp"><strong>Jana</strong></td>
+      <td></td><td></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===== SECTION B — FIRST DAY ===== -->
+<div class="section-title">B · First day <span class="kicker">— signatures, access, mandatory training</span></div>
+<table class="checklist">
+  <thead>
+    <tr>
+      <th class="col-check">✓</th>
+      <th class="col-task">Task</th>
+      <th class="col-resp">Responsible</th>
+      <th class="col-date">Date</th>
+      <th class="col-sig">Signature</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Sign employment contract / DPP / DPČ</td>
+      <td class="col-resp"><strong>Markéta</strong></td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Sign income-tax payer declaration
+        <span class="task-note">§38k Act No. 586/1992 Coll.</span></td>
+      <td class="col-resp"><strong>Markéta</strong></td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Provide health-insurance company details + bank account number</td>
+      <td class="col-resp"><strong>Markéta</strong></td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Health & safety + fire-safety induction (BOZP / PO)
+        <span class="task-note">§103 Labour Code — work cannot begin without this training</span></td>
+      <td class="col-resp">Safety officer</td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>GDPR and confidentiality training</td>
+      <td class="col-resp"><strong>Markéta</strong></td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Hand over chip card and keys to office / laboratory</td>
+      <td class="col-resp">Reception + supervisor</td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Hand over login credentials and passwords
+        <span class="task-note">e-mail, Wi-Fi, attendance system, shared drives — in person</span></td>
+      <td class="col-resp">IT</td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Hand over the welcome pack (Centre tote with PR materials)</td>
+      <td class="col-resp"><strong>Jana</strong></td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Site tour — entrances, restrooms, kitchen, library</td>
+      <td class="col-resp">Supervisor + buddy</td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Introduction to the attendance system
+        <span class="task-note">how to use, working hours, sick days</span></td>
+      <td class="col-resp"><strong>Markéta</strong></td>
+      <td></td><td></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===== SECTION C — FIRST WEEK ===== -->
+<div class="section-title">C · First week <span class="kicker">— meet the team, documents, lab</span></div>
+<table class="checklist">
+  <thead>
+    <tr>
+      <th class="col-check">✓</th>
+      <th class="col-task">Task</th>
+      <th class="col-resp">Responsible</th>
+      <th class="col-date">Date</th>
+      <th class="col-sig">Signature</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Introduction to laboratory heads and the Centre manager</td>
+      <td class="col-resp">Supervisor + buddy</td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Introduction to administration, payroll and reception</td>
+      <td class="col-resp"><strong>Markéta</strong></td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Introduction to workshops and technical facilities
+        <span class="task-note">mechanical, glass, electrical — contacts and rules</span></td>
+      <td class="col-resp">Supervisor + buddy</td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Hand over list of internal documents and directives
+        <span class="task-note">SOPs, code of ethics, publication rules, IP policy</span></td>
+      <td class="col-resp"><strong>Markéta</strong></td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Information about the car and bicycle reservation system
+        <span class="task-note">5 service vehicles, ride-sharing, rules</span></td>
+      <td class="col-resp"><strong>Markéta</strong></td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Initial laboratory training — instruments, chemicals, lab notebook
+        <span class="task-note">no instrument may be used without local training</span></td>
+      <td class="col-resp">Supervisor + buddy</td>
+      <td></td><td></td>
+    </tr>
+    <tr>
+      <td class="col-check"><span class="checkbox"></span></td>
+      <td>Hand over key contacts — supervisor, HR, IT, reception, maintenance</td>
+      <td class="col-resp"><strong>Markéta</strong> / <strong>Jana</strong></td>
+      <td></td><td></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===== LEGAL NOTE ===== -->
+<div class="legal-note">
+  <strong>Note:</strong> This checklist serves as an internal record of the onboarding process. Items referencing legislation (§59 Act No. 373/2011 Coll., §103 Labour Code, §38k Act No. 586/1992 Coll.) are mandatory under Czech law and must be documented. One completed original is filed in the employee's personnel file, the second copy stays with the employee.
+</div>
+
+<!-- ===== SIGNATURES ===== -->
+<section class="signatures">
+  <h2>Confirmation of handover and acceptance</h2>
+  <div class="sig-grid">
+    <div class="sig-block">
+      <div class="sig-line">
+        <strong>Employee</strong>
+        name, date, signature
+      </div>
+    </div>
+    <div class="sig-block">
+      <div class="sig-line">
+        <strong>HR</strong>
+        Markéta Stefanová / Jana Budínová
+      </div>
+    </div>
+    <div class="sig-block">
+      <div class="sig-line">
+        <strong>Direct supervisor</strong>
+        name, date, signature
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
