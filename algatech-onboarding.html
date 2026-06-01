@@ -402,7 +402,7 @@
         <p class="lead">
           Tohle je onboardingový průvodce pro nové kolegy, kolegyně, postdoky, doktorandy i hosty centra Algatech v Třeboni.
           Ať teprve nastupujete, nebo jste tu první týdny — najdete tu jasné odpovědi na nejčastější otázky.
-          Cokoli vám není jasné, klidně napište <strong>Janě</strong> — jsme tu od toho.
+          Cokoli vám není jasné, klidně napište <strong>Markétě</strong> — jsme tu od toho.
         </p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#cs-toc">Otevřít přehled témat</a>
@@ -591,18 +591,19 @@
       <p class="section-intro">Pro české kolegy je první kontakt <strong>Markéta</strong>, pro zahraniční kolegy <strong>Jana</strong>. Když si nejste jistí, klidně napište kterékoli z nás — předáme to dál. Vážně.</p>
       <div class="contact-grid">
         <div class="card">
+          <h3><span class="card-icon" aria-hidden="true">🤝</span>HR · Markéta</h3>
+          <p><strong>Markéta Stefanová</strong></p>
+          <p>HR kontakt pro <strong>české zaměstnance</strong>. Pomáhá s nástupem, pracovní smlouvou, <strong>vstupní lékařskou prohlídkou</strong>, <strong>docházkou</strong>, mzdou, daňovými formuláři, evidencí dovolené i běžným fungováním centra.</p>
+          <p>📞 <a href="tel:+420384340415">+420 384 340 415</a><br>
+          ✉️ <a href="mailto:stefanova@alga.cz">stefanova@alga.cz</a><br>
+          🔗 <a href="https://www.alga.cz/c-362-stefanova-marketa.html" target="_blank" rel="noopener noreferrer">Profil na alga.cz</a></p>
+        </div>
+        <div class="card">
           <h3><span class="card-icon" aria-hidden="true">🤝</span>HR · Jana</h3>
           <p><strong>Jana Budínová</strong></p>
           <p>HR kontakt pro celé centrum, primárně pro <strong>zahraniční kolegy</strong> a relokaci. Pomáhá s nástupem, ubytováním v centru, pobytovými formalitami (cizinecká policie, OAMP), formalitami s úřady i s tím, na koho v centru se obrátit.</p>
           <p>📞 <a href="tel:+420724874274">+420 724 874 274</a><br>
           ✉️ <a href="mailto:budinova@alga.cz">budinova@alga.cz</a></p>
-        </div>
-        <div class="card">
-          <h3><span class="card-icon" aria-hidden="true">🤝</span>HR · Markéta</h3>
-          <p><strong>Markéta Stefanová</strong></p>
-          <p>HR kontakt pro <strong>české zaměstnance</strong>. Pomáhá s nástupem, pracovní smlouvou, <strong>vstupní lékařskou prohlídkou</strong>, <strong>docházkou</strong>, mzdou, daňovými formuláři, evidencí dovolené i běžným fungováním centra.</p>
-          <p>📞 <a href="tel:+420384340415">+420 384 340 415</a><br>
-          ✉️ <a href="mailto:stefanova@alga.cz">stefanova@alga.cz</a></p>
         </div>
         <div class="card">
           <h3><span class="card-icon" aria-hidden="true">🏛️</span>Vedení centra</h3>
@@ -831,48 +832,7 @@
       <p class="section-intro">Vyberte si, kdo vám odpoví — pro <strong>české kolegy</strong> je první kontakt Markéta, pro <strong>zahraniční kolegy</strong> Jana. Po odeslání formuláře se otevře váš e-mailový klient s předvyplněnou zprávou. Většinou odpovídáme do dvou pracovních dnů.</p>
 
       <div class="ask-grid">
-        <!-- FORM 1: Jana — onboarding, ubytování, relokace, cizinecká agenda -->
-        <div class="ask-col">
-          <h3 class="ask-title"><span class="card-icon" aria-hidden="true">🤝</span>Jana — zahraniční kolegové, ubytování, relokace</h3>
-          <p class="form-help" style="margin-bottom:16px;">Pište Janě, pokud jste zahraniční kolega, řešíte pobyt v ČR, vízum, cizineckou policii, ubytování v centru nebo relokaci do Třeboně.</p>
-          <form id="cs-askFormJ" novalidate>
-            <div class="form-grid">
-              <div>
-                <label for="cs-askJName">Vaše jméno</label>
-                <input type="text" id="cs-askJName" name="askJName" required autocomplete="name" />
-              </div>
-              <div>
-                <label for="cs-askJEmail">Váš e-mail</label>
-                <input type="email" id="cs-askJEmail" name="askJEmail" required autocomplete="email" />
-              </div>
-            </div>
-            <div class="form-row">
-              <label for="cs-askJTopic">Téma</label>
-              <select id="cs-askJTopic" name="askJTopic">
-                <option value="">— vyberte téma —</option>
-                <option value="Nástup / první kroky">Nástup / první kroky</option>
-                <option value="Ubytování v centru">Ubytování v centru</option>
-                <option value="Relokace do Třeboně">Relokace do Třeboně</option>
-                <option value="Pobytové formality / cizinecká policie">Pobytové formality / cizinecká policie</option>
-                <option value="Život v Třeboni / lékaři">Život v Třeboni / lékaři</option>
-                <option value="Jiné">Jiné</option>
-              </select>
-            </div>
-            <div class="form-row">
-              <label for="cs-askJMessage">Váš dotaz</label>
-              <textarea id="cs-askJMessage" name="askJMessage" required placeholder="Napište svůj dotaz..."></textarea>
-              <p class="form-help">Tip: napište i datum nástupu nebo jméno vedoucího — odpovíme rychleji.</p>
-            </div>
-            <div class="form-row" style="display:flex; gap:12px; flex-wrap:wrap;">
-              <button class="btn btn-primary" type="submit" id="cs-askJSend">Odeslat Janě</button>
-              <button class="btn btn-secondary" type="button" id="cs-askJCopy">Zkopírovat</button>
-            </div>
-            <div class="form-status" id="cs-askJStatus" role="status" aria-live="polite"></div>
-          </form>
-          <p class="form-help" style="margin-top:14px;">Raději telefon? Volejte Janě na <a href="tel:+420724874274">+420 724 874 274</a> (po–pá).</p>
-        </div>
-
-        <!-- FORM 2: Markéta — HR pro české kolegy -->
+        <!-- FORM 1: Markéta — HR pro české kolegy -->
         <div class="ask-col">
           <h3 class="ask-title"><span class="card-icon" aria-hidden="true">🤝</span>Markéta — HR pro české kolegy</h3>
           <p class="form-help" style="margin-bottom:16px;">Pište Markétě, pokud jste český zaměstnanec — nástup, pracovní smlouva, vstupní lékařská prohlídka, docházka, mzda, daňové formuláře a evidence dovolené.</p>
@@ -914,6 +874,47 @@
             <div class="form-status" id="cs-askMStatus" role="status" aria-live="polite"></div>
           </form>
           <p class="form-help" style="margin-top:14px;">Raději telefon? Volejte Markétě na <a href="tel:+420384340415">+420 384 340 415</a> (po–pá).</p>
+        </div>
+
+        <!-- FORM 2: Jana — zahraniční kolegové, ubytování, relokace -->
+        <div class="ask-col">
+          <h3 class="ask-title"><span class="card-icon" aria-hidden="true">🤝</span>Jana — zahraniční kolegové, ubytování, relokace</h3>
+          <p class="form-help" style="margin-bottom:16px;">Pište Janě, pokud jste zahraniční kolega, řešíte pobyt v ČR, vízum, cizineckou policii, ubytování v centru nebo relokaci do Třeboně.</p>
+          <form id="cs-askFormJ" novalidate>
+            <div class="form-grid">
+              <div>
+                <label for="cs-askJName">Vaše jméno</label>
+                <input type="text" id="cs-askJName" name="askJName" required autocomplete="name" />
+              </div>
+              <div>
+                <label for="cs-askJEmail">Váš e-mail</label>
+                <input type="email" id="cs-askJEmail" name="askJEmail" required autocomplete="email" />
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="cs-askJTopic">Téma</label>
+              <select id="cs-askJTopic" name="askJTopic">
+                <option value="">— vyberte téma —</option>
+                <option value="Nástup / první kroky">Nástup / první kroky</option>
+                <option value="Ubytování v centru">Ubytování v centru</option>
+                <option value="Relokace do Třeboně">Relokace do Třeboně</option>
+                <option value="Pobytové formality / cizinecká policie">Pobytové formality / cizinecká policie</option>
+                <option value="Život v Třeboni / lékaři">Život v Třeboni / lékaři</option>
+                <option value="Jiné">Jiné</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="cs-askJMessage">Váš dotaz</label>
+              <textarea id="cs-askJMessage" name="askJMessage" required placeholder="Napište svůj dotaz..."></textarea>
+              <p class="form-help">Tip: napište i datum nástupu nebo jméno vedoucího — odpovíme rychleji.</p>
+            </div>
+            <div class="form-row" style="display:flex; gap:12px; flex-wrap:wrap;">
+              <button class="btn btn-primary" type="submit" id="cs-askJSend">Odeslat Janě</button>
+              <button class="btn btn-secondary" type="button" id="cs-askJCopy">Zkopírovat</button>
+            </div>
+            <div class="form-status" id="cs-askJStatus" role="status" aria-live="polite"></div>
+          </form>
+          <p class="form-help" style="margin-top:14px;">Raději telefon? Volejte Janě na <a href="tel:+420724874274">+420 724 874 274</a> (po–pá).</p>
         </div>
       </div>
     </section>
@@ -1121,7 +1122,8 @@
           <p><strong>Jana Budínová</strong></p>
           <p>HR contact for the whole centre, primarily for <strong>international colleagues</strong> and relocation. Helps with onboarding, on-site accommodation, residence and visa formalities (Foreign Police, OAMP), authority paperwork and routing you to the right person at the centre.</p>
           <p>📞 <a href="tel:+420724874274">+420 724 874 274</a><br>
-          ✉️ <a href="mailto:budinova@alga.cz">budinova@alga.cz</a></p>
+          ✉️ <a href="mailto:budinova@alga.cz">budinova@alga.cz</a><br>
+          🔗 <a href="https://www.alga.cz/c-709-budinova-jana.html" target="_blank" rel="noopener noreferrer">Profile on alga.cz</a></p>
         </div>
         <div class="card">
           <h3><span class="card-icon" aria-hidden="true">🤝</span>HR · Markéta</h3>
