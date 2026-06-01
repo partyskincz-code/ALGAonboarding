@@ -7,21 +7,16 @@ Onboarding materials for new staff at **Centre Algatech** (Institute of Microbio
 
 ## Co je v repozitáři / What's in this repo
 
-### 🇨🇿 Česká verze
-| Soubor | Popis |
+### 🌐 Uvítací stránka / Welcome page
+| Soubor / File | Popis / Description |
 |---|---|
-| [`algatech-vitejte.html`](algatech-vitejte.html) | Uvítací webová stránka pro nové české zaměstnance |
-| [`algatech-vitejte-preview.pdf`](algatech-vitejte-preview.pdf) | Tisková verze uvítací stránky |
-| [`algatech-checklist-cs.html`](algatech-checklist-cs.html) | Odškrtávací onboardingový checklist |
-| [`algatech-checklist-cs.pdf`](algatech-checklist-cs.pdf) | Tisková verze checklistu |
+| [`algatech-onboarding.html`](algatech-onboarding.html) | Uvítací web s přepínačem jazyka 🇨🇿 / 🇬🇧 (vpravo nahoře) — jedna stránka, dvě jazykové verze. Bilingual welcome page with a CZ / EN switch in the top-right corner. |
 
-### 🇬🇧 English version
-| File | Description |
+### ✅ Checklisty / Checklists
+| Soubor / File | Popis / Description |
 |---|---|
-| [`algatech-welcome-en.html`](algatech-welcome-en.html) | Welcome webpage for international staff |
-| [`algatech-welcome-en-preview.pdf`](algatech-welcome-en-preview.pdf) | Printable version of the welcome page |
-| [`algatech-checklist-en.html`](algatech-checklist-en.html) | Printable onboarding checklist |
-| [`algatech-checklist-en.pdf`](algatech-checklist-en.pdf) | PDF version of the checklist |
+| [`algatech-checklist-cs.html`](algatech-checklist-cs.html) · [`.pdf`](algatech-checklist-cs.pdf) | 🇨🇿 Odškrtávací onboardingový checklist (web + tisk) |
+| [`algatech-checklist-en.html`](algatech-checklist-en.html) · [`.pdf`](algatech-checklist-en.pdf) | 🇬🇧 Printable onboarding checklist (web + print) |
 
 ---
 
