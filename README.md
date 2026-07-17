@@ -7,10 +7,10 @@ Onboarding materials for new staff at **Centre Algatech** (Institute of Microbio
 
 ## Co je v repozitáři / What's in this repo
 
-### 🌐 Uvítací stránka / Welcome page
+### 🌐 Příručka HR / HR handbook
 | Soubor / File | Popis / Description |
 |---|---|
-| [`algatech-onboarding.html`](algatech-onboarding.html) | Uvítací web s přepínačem jazyka 🇨🇿 / 🇬🇧 (vpravo nahoře) — jedna stránka, dvě jazykové verze. Bilingual welcome page with a CZ / EN switch in the top-right corner. |
+| [`index.html`](index.html) | Příručka HR týmu s přepínačem jazyka 🇨🇿 / 🇬🇧 (vpravo nahoře) — jedna stránka, dvě jazykové verze, nasazená přes GitHub Pages. HR handbook with a CZ / EN switch in the top-right corner, deployed via GitHub Pages. |
 
 ### ✅ Checklisty / Checklists
 | Soubor / File | Popis / Description |
